@@ -1,0 +1,23 @@
+<h1>{{ current_milestone.title }}</h1>
+<ul>
+  {% for milestone_issue in milestone_issues %}
+    <li>
+      <a href="{{ path('issues', {
+        project_id: project_id,
+        milestone_id: current_milestone.id
+      }) }}">
+        {{ milestone_issue.title }}
+        <span>  (estimate time  {{ milestone_issue.time_stats.human_time_estimate }}  / time spent {{ milestone_issue.time_stats.human_total_time_spent }})</span>
+      </a>
+    </li>
+
+  {% endfor %}
+</ul>
+<div>
+  -Total estimate time :
+  {{ total_estimate_time }}
+</div>
+<div>
+  -Total spent time  :
+  {{ total_spent_time }}
+</div>

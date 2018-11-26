@@ -1,0 +1,18 @@
+<h1>{{ current_project.name }}</h1>
+<ul>
+  {% for milestone in milestones %}
+    <li>
+      <a href="{{ path('issues', {
+        project_id: project_id,
+        milestone_id: milestone.id
+      }) }}">
+        <!-- /project/{{ milestone.project_id }}/milestones/{{ milestone.id }}/issues -->
+         {{ milestone.title }}
+      </a>
+    </li>
+  {% endfor %}
+  {% if milestones is empty %}
+  <div>No milestones available</div>
+  {% endif %}
+</ul>
+

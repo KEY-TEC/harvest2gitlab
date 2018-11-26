@@ -1,0 +1,10 @@
+<h1>Projects</h1>
+<ul>
+  {% for project in projects %}
+    <li>
+      <a href="/project/{{project.id}}/milestones">
+        {{ project.name }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
