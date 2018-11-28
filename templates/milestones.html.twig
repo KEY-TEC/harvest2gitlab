@@ -2,11 +2,10 @@
 <ul>
   {% for milestone in milestones %}
     <li>
-      <a href="{{ path('issues', {
-        project_id: project_id,
-        milestone_id: milestone.id
+      <a href="{{ path("issues", {
+        "projectId": project_id,
+        "milestoneId": milestone.id
       }) }}">
-        <!-- /project/{{ milestone.project_id }}/milestones/{{ milestone.id }}/issues -->
          {{ milestone.title }}
       </a>
     </li>

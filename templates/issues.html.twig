@@ -2,9 +2,9 @@
 <ul>
   {% for milestone_issue in milestone_issues %}
     <li>
-      <a href="{{ path('issues', {
-        project_id: project_id,
-        milestone_id: current_milestone.id
+      <a href="{{ path("issues", {
+        "projectId": project_id,
+        "milestoneId": current_milestone.id
       }) }}">
         {{ milestone_issue.title }}
         <span>  (estimate time  {{ milestone_issue.time_stats.human_time_estimate }}  / time spent {{ milestone_issue.time_stats.human_total_time_spent }})</span>

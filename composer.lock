@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1cae3b047ac168753b0639ac9b77f2b",
+    "content-hash": "6c3988ca152905c040c86ee5cbf81627",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -1365,16 +1365,16 @@
         },
         {
             "name": "freshheads/harvest-api-client",
-            "version": "dev-feature/time_entries",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "https://github.com/KEY-TEC/harvest-api-client.git",
-                "reference": "42682a1bcea98179883451849e11b5ff7490324e"
+                "url": "https://github.com/freshheads/harvest-api-client.git",
+                "reference": "a82628c7d12b1ecb7dbc01c51ffe1656d0efa9c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KEY-TEC/harvest-api-client/zipball/42682a1bcea98179883451849e11b5ff7490324e",
-                "reference": "42682a1bcea98179883451849e11b5ff7490324e",
+                "url": "https://api.github.com/repos/freshheads/harvest-api-client/zipball/a82628c7d12b1ecb7dbc01c51ffe1656d0efa9c5",
+                "reference": "a82628c7d12b1ecb7dbc01c51ffe1656d0efa9c5",
                 "shasum": ""
             },
             "require": {
@@ -1387,9 +1387,7 @@
                 "symfony/options-resolver": "^3.0 || ^4.0"
             },
             "require-dev": {
-                "guzzlehttp/psr7": "^1.0",
                 "jms/serializer": "^1.13.0 || ^2.0",
-                "php-http/message": "^1.0",
                 "php-http/mock-client": "^1.0",
                 "phpunit/phpunit": "^7",
                 "symfony/yaml": "^4.1"
@@ -1428,9 +1426,9 @@
             "support": {
                 "email": "info@freshheads.com",
                 "issues": "https://github.com/freshheads/harvest-api-client/issues",
-                "source": "https://github.com/KEY-TEC/harvest-api-client/tree/feature/time_entries"
+                "source": "https://github.com/freshheads/harvest-api-client/tree/develop"
             },
-            "time": "2018-11-14T14:40:26+00:00"
+            "time": "2018-11-22T10:01:22+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

@@ -1,10 +1,10 @@
-<h1>Projects</h1>
+<h1>{{ headline|default("Projects") }}</h1>
 <ul>
   {% for project in projects %}
     <li>
-      <a href="/project/{{project.id}}/milestones">
-        {{ project.name }}
-      </a>
+      <h2>{{ project.name }}:</h2>
+      <a href="{{ path("milestones", {"projectId": project.id}) }}">Milestones</a>,
+      <a href="{{ path("project_import", {"projectId": project.id}) }}">Import</a>
     </li>
   {% endfor %}
 </ul>

@@ -15,10 +15,10 @@ services:
                             # fetching services directly from the container via $container->get() won't work.
                             # The best practice is to be explicit about your dependencies anyway.
         bind:               # defines the scalar arguments once and apply them to any service defined/created in this file
-            $git_url: '%env(GIT_URL)%'
-            $git_token: '%env(GIT_TOKEN)%'
-            $harvest_account_id: '%env(HARVEST_ACCOUNT_ID)%'
-            $harvest_access_token: '%env(HARVEST_ACCESS_TOKEN)%'
+            $gitUrl: '%env(GIT_URL)%'
+            $gitToken: '%env(GIT_TOKEN)%'
+            $harvestAccountId: '%env(HARVEST_ACCOUNT_ID)%'
+            $harvestAccessToken: '%env(HARVEST_ACCESS_TOKEN)%'
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
