@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c3988ca152905c040c86ee5cbf81627",
+    "content-hash": "36d2c726135f60e5bc6ad404b8c8c8d8",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -1015,12 +1015,12 @@
             "version": "2.7.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/doctrine2.git",
+                "url": "https://github.com/doctrine/orm.git",
                 "reference": "c036c0b86b2c0ced3552f1392436c1aa933a1a27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/c036c0b86b2c0ced3552f1392436c1aa933a1a27",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/c036c0b86b2c0ced3552f1392436c1aa933a1a27",
                 "reference": "c036c0b86b2c0ced3552f1392436c1aa933a1a27",
                 "shasum": ""
             },
@@ -6006,20 +6006,21 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "dev-master",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "53927dddf3afa2088b355188e143bba42159bf5d"
+                "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/53927dddf3afa2088b355188e143bba42159bf5d",
-                "reference": "53927dddf3afa2088b355188e143bba42159bf5d",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
+                "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.3 || ^7.0"
+                "php": "^5.3.3 || ^7.0",
+                "symfony/polyfill-ctype": "^1.8"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.6",
@@ -6052,7 +6053,7 @@
                 "check",
                 "validate"
             ],
-            "time": "2018-05-29T14:25:02+00:00"
+            "time": "2018-12-25T11:19:39+00:00"
         },
         {
             "name": "zendframework/zend-code",
@@ -6729,16 +6730,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "dc98f111dbbecdddb0a7fbb204e00a0846299dbc"
+                "reference": "21b339c9f81db98b87ed31afd887d916e2825b8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/dc98f111dbbecdddb0a7fbb204e00a0846299dbc",
-                "reference": "dc98f111dbbecdddb0a7fbb204e00a0846299dbc",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/21b339c9f81db98b87ed31afd887d916e2825b8c",
+                "reference": "21b339c9f81db98b87ed31afd887d916e2825b8c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.5.9"
             },
             "conflict": {
                 "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0"
@@ -6753,7 +6754,7 @@
             "type": "symfony-bridge",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "4.3-dev"
                 },
                 "thanks": {
                     "name": "phpunit/phpunit",
@@ -6787,7 +6788,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2018-11-20T16:22:05+00:00"
+            "time": "2019-01-16T21:53:45+00:00"
         },
         {
             "name": "symfony/polyfill-php72",

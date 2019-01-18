@@ -1,10 +1,12 @@
 <h1>{{ headline|default("Projects") }}</h1>
 <ul>
   {% for project in projects %}
+      {% if project.name is defined %}
     <li>
       <h2>{{ project.name }}:</h2>
       <a href="{{ path("milestones", {"projectId": project.id}) }}">Milestones</a>,
       <a href="{{ path("project_import", {"projectId": project.id}) }}">Import</a>
     </li>
+      {% endif %}
   {% endfor %}
 </ul>
