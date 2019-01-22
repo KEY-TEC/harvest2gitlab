@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit H2GConfig{% endblock %}
+
+{% block body %}
+    <h1>Edit H2GConfig</h1>
+
+    {{ include('h2_g_config/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('h2_g_config_index') }}">back to list</a>
+
+    {{ include('h2_g_config/_delete_form.html.twig') }}
+{% endblock %}

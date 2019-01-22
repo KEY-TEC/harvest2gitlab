@@ -20,7 +20,14 @@ class HarvestService implements HarvestServiceInterface {
    *
    * @var \FH\HarvestApiClient\Endpoint\ProjectEndpoint
    */
-  private $project;
+  private $projectEndpoint;
+
+  /**
+   * Loaded projects.
+   *
+   * @var \FH\HarvestApiClient\Model\Project\Project[]
+   */
+  private $projects;
 
   /**
    * The Harvest time entry.
@@ -49,7 +56,7 @@ class HarvestService implements HarvestServiceInterface {
         __DIR__
         . '/../../vendor/freshheads/harvest-api-client/src/Model/configuration'
       )->build();
-    $this->project = new ProjectEndpoint($client, $serializer);
+    $this->projectEndpoint = new ProjectEndpoint($client, $serializer);
     $this->timeEntry = new TimeEntryEndpoint($client, $serializer);
   }
 
@@ -75,15 +82,38 @@ class HarvestService implements HarvestServiceInterface {
   }
 
   /**
+   * Get or loads projects from endpoint.
+   * @return array
+   */
+  protected function getProjects() {
+    if (empty($this->projects)) {
+      $this->projects = $this->projectEndpoint->list()->getProjects();
+    }
+    return $this->projects;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function getHarvestProjectByCode($project_code) {
-    foreach ($this->project->list()->getProjects() as $project) {
+    foreach ($this->getProjects() as $project) {
       if ($project_code == $project->getCode()) {
         return $project;
       }
     }
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getHarvestProjectById($project_id) {
+    foreach ($this->getProjects() as $project) {
+      if ($project_id == $project->getId()) {
+        return $project;
+      }
+    }
+  }
+
 
   /**
    * Returns the date string from 30 days ago.

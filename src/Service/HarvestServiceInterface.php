@@ -28,9 +28,20 @@ interface HarvestServiceInterface {
    * @param string $project_code
    *   The project code.
    *
-   * @return mixed
+   * @return Project
    *   The project.
    */
   public function getHarvestProjectByCode($project_code);
+
+  /**
+   * Returns the Harvest project by its project id.
+   *
+   * @param integer $harvest_id
+   *   The project id.
+   *
+   * @return Project
+   *   The project.
+   */
+  public function getHarvestProjectById($harvest_id);
 
 }

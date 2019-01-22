@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}H2GConfig{% endblock %}
+
+{% block body %}
+    <h1>H2GConfig</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ h2_g_config.id }}</td>
+            </tr>
+            <tr>
+                <th>Gitlab:</th>
+                <td>{{ h2_g_config.gitlabDisplayName }} ({{ h2_g_config.gitlabId }})</td>
+            </tr>
+            <tr>
+                <th>Harvest:</th>
+                <td>{{ h2_g_config.harvestDisplayName }} ({{ h2_g_config.harvestId }})</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('h2_g_config_index') }}">back to list</a>
+
+    <a href="{{ path('h2_g_config_edit', {'id': h2_g_config.id}) }}">edit</a>
+
+    {{ include('h2_g_config/_delete_form.html.twig') }}
+{% endblock %}

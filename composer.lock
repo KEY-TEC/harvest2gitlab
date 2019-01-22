@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "36d2c726135f60e5bc6ad404b8c8c8d8",
@@ -3557,12 +3557,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "261faeb0557823dfb8d22e38ec7bbe51353df8b9"
+                "reference": "e3260213a3d8cef0b169d7fe01767cd886f43bfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/261faeb0557823dfb8d22e38ec7bbe51353df8b9",
-                "reference": "261faeb0557823dfb8d22e38ec7bbe51353df8b9",
+                "url": "https://api.github.com/repos/symfony/console/zipball/e3260213a3d8cef0b169d7fe01767cd886f43bfc",
+                "reference": "e3260213a3d8cef0b169d7fe01767cd886f43bfc",
                 "shasum": ""
             },
             "require": {
@@ -3573,6 +3573,9 @@
                 "symfony/dependency-injection": "<3.4",
                 "symfony/process": "<3.3"
             },
+            "provide": {
+                "psr/log-implementation": "1.0"
+            },
             "require-dev": {
                 "psr/log": "~1.0",
                 "symfony/config": "~3.4|~4.0",
@@ -3582,7 +3585,7 @@
                 "symfony/process": "~3.4|~4.0"
             },
             "suggest": {
-                "psr/log-implementation": "For using the console logger",
+                "psr/log": "For using the console logger",
                 "symfony/event-dispatcher": "",
                 "symfony/lock": "",
                 "symfony/process": ""
@@ -3617,7 +3620,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-11-20T16:17:28+00:00"
+            "time": "2019-01-16T19:07:26+00:00"
         },
         {
             "name": "symfony/debug",

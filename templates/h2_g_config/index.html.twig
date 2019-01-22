@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}H2GConfig index{% endblock %}
+
+{% block body %}
+    <h1>H2GConfig index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Gitlab Project</th>
+                <th>Harvest Project</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for h2_g_config in h2_g_configs %}
+            <tr>
+                <td>{{ h2_g_config.id }}</td>
+                <td>{{ h2_g_config.gitlabDisplayName }}</td>
+                <td>{{ h2_g_config.harvestDisplayName }}</td>
+                <td>
+                    <a href="{{ path('h2_g_config_show', {'id': h2_g_config.id}) }}">show</a>
+                    <a href="{{ path('h2_g_config_edit', {'id': h2_g_config.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('h2_g_config_new') }}">Create new</a>
+{% endblock %}

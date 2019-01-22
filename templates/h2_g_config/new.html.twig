@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New H2GConfig{% endblock %}
+
+{% block body %}
+    <h1>Create new H2GConfig</h1>
+
+    {{ include('h2_g_config/_form.html.twig') }}
+
+    <a href="{{ path('h2_g_config_index') }}">back to list</a>
+{% endblock %}

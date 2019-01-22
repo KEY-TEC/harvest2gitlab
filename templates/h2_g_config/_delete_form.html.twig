@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('h2_g_config_delete', {'id': h2_g_config.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ h2_g_config.id) }}">
+    <button class="btn">Delete</button>
+</form>
