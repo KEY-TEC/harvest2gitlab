@@ -1,12 +1,24 @@
-<h1>{{ headline|default("Projects") }}</h1>
-<ul>
-  {% for project in projects %}
+{% extends 'base.html.twig' %}
+{% block title %}{{ headline|default("Harvest to Gitlab Time Export") }}{% endblock %}
+
+{% block body %}
+  <h1>{{ headline|default("Harvest to Gitlab Time Export") }}</h1>
+  <select id="project_select" class="js-select2">
+    {% for project in projects %}
       {% if project.name is defined %}
-    <li>
-      <h2>{{ project.name }}:</h2>
-      <a href="{{ path("milestones", {"projectId": project.id}) }}">Milestones</a>,
-      <a href="{{ path("project_import", {"projectId": project.id}) }}">Import</a>
-    </li>
+        <option value="{{ path("harvest_export", {"projectId": project.id}) }}">
+          <h2>{% if project.code is not empty %}[{{ project.code }}] {% endif %}{{ project.name }} ({{ project.id }})</h2>
+        </option>
       {% endif %}
-  {% endfor %}
-</ul>
+    {% endfor %}
+  </select>
+  <div>
+    <button onclick="exportHarvest()">Export</button>
+  </div>
+  <script>
+    function exportHarvest() {
+      var el = document.getElementById('project_select');
+      window.location.href = el.options[el.selectedIndex].value;
+    }
+  </script>
+{% endblock %}

@@ -17,12 +17,13 @@ interface GitlabServiceInterface {
    * @param string $issue_id
    *   The issue id.
    * @param int $hours
-   *   The tracked hours of a ticket.
+   *   The tracked hours of a ticket in decimal.
+   *   Eg 1.34
    *
    * @return mixed
    *   Returns int of changed time entries.
    */
-  public function saveTimeEstimate($project_id, $issue_id, $hours);
+  public function saveTimeSpend($project_id, $issue_id, $hours);
 
   /**
    * Returns project by Harvest path with namespace.

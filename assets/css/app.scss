@@ -1,0 +1,25 @@
+@import "select2.min.css";
+
+body {
+  background-color: #EFEFEF;
+}
+
+select, .select2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  max-width: 100%;
+}
+
+button {
+  font-size: 20px;
+  border: 1px solid black;
+  background-color: transparent;
+  padding: 10px 20px;
+  box-shadow: 0 0 0 0 black;
+  transition: box-shadow 150ms ease;
+
+  &:hover {
+    box-shadow: 0 0 4px 0 black;
+    cursor: pointer;
+  }
+}

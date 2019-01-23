@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use Gitlab\Exception\RuntimeException;
+
 /**
  * Service to match Harvest time entries with Gitlab issues.
  *
@@ -42,24 +44,40 @@ class ImportService implements ImportServiceInterface {
    * @param string $projectPathWithNamespace
    *   The path with namespace form Harvest.
    *
-   * @return int
-   *   The updated number of updated time entries.
+   * @return array
+   *   Info:
+   *    0 = updated issues
+   *    1 = all issues
+   *    2 = failed
    */
-  public function importTimeEntries($projectPathWithNamespace) {
-    $harvest_project = $this->harvestService->getHarvestProjectByCode($projectPathWithNamespace);
-    $time_entries = $this->harvestService->getValidTimeEntries($harvest_project);
-    $gitlab_project = $this->gitlabService->getProjectByHarvest($projectPathWithNamespace);
+  public function importTimeEntries($projectId) {
+    $harvest_project = $this->harvestService->getProjectById($projectId);
+    $time_entries = $this->harvestService->getTimeEntriesWithReferences($harvest_project);
+    $fails = [];
+    $updated = [];
 
-    $updated_time_entries = 0;
-    foreach ($time_entries as $key => $time_entry) {
-      $parts = explode('/', $key);
-      $id = $parts[count($parts) - 1];
-      $check_time_estimate = $this->gitlabService->saveTimeEstimate($gitlab_project['id'], $id, $time_entry);
-      if ($check_time_estimate == TRUE) {
-        $updated_time_entries++;
+    foreach ($time_entries as $issue) {
+      $reference = $issue[0]->getExternalReference()['id'];
+      $reference = explode('#', $reference);
+
+      try {
+        $hours = 0;
+        foreach ($issue as $time_entry) {
+          $hours += $time_entry->getHours();
+        }
+
+        if ($this->gitlabService->saveTimeSpend($reference[0], $reference[1], $hours)) {
+          $updated[] = $issue[0]->getExternalReference();
+        }
+      }
+      catch (RuntimeException $e) {
+        // project not found
+        $fails[] = $issue[0]->getExternalReference();
+        continue;
       }
     }
-    return $updated_time_entries;
+
+    return [$updated, count($time_entries), $fails];
   }
 
 }

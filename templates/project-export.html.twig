@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+  <h2>Time entries exported for {% if project.code is not empty %}[{{ project.code }}] {% endif %}{{ project.name }} </h2>
+  <p><strong>{{ updated|length }} of {{ all }} </strong> issues were updated:</p>
+  {{ dump(updated) }}
+  <p><strong>{{ failed|length }}</strong> issues not found:</p>
+  {{ dump(failed) }}
+  <a href="{{ path("harvest_projects") }}">Go back to selection</a>
+{% endblock %}

@@ -20,7 +20,14 @@ class HarvestService implements HarvestServiceInterface {
    *
    * @var \FH\HarvestApiClient\Endpoint\ProjectEndpoint
    */
-  private $project;
+  private $projectEndpoint;
+
+  /**
+   * Loaded projects.
+   *
+   * @var \FH\HarvestApiClient\Model\Project\Project[]
+   */
+  private $projects;
 
   /**
    * The Harvest time entry.
@@ -49,36 +56,54 @@ class HarvestService implements HarvestServiceInterface {
         __DIR__
         . '/../../vendor/freshheads/harvest-api-client/src/Model/configuration'
       )->build();
-    $this->project = new ProjectEndpoint($client, $serializer);
+    $this->projectEndpoint = new ProjectEndpoint($client, $serializer);
     $this->timeEntry = new TimeEntryEndpoint($client, $serializer);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getValidTimeEntries(Project $harvestProject) {
+  public function getTimeEntriesWithReferences(Project $harvestProject) {
     $all_time_entries = $this->fetchTimeEntriesRecursive($harvestProject);
-    $external_reference = array();
+    $timeEntries = [];
     foreach ($all_time_entries as $timeEntry) {
       $permalink = $timeEntry->getExternalReference()['permalink'];
       if (empty($permalink)) {
         continue;
       }
       if (isset($external_reference[$permalink]) == FALSE) {
-        $external_reference[$permalink] = $timeEntry->getHours();
-      }
-      else {
-        $external_reference[$permalink] += $timeEntry->getHours();
+        $timeEntries[$permalink][] = $timeEntry;
       }
     }
-    return $external_reference;
+    return $timeEntries;
+  }
+
+  /**
+   * Get or loads projects from endpoint.
+   *
+   * @param array $params
+   *   boolean is_active: Pass true (default) to only return active projects and false to return inactive projects.
+   *   integer client_id: Only return projects belonging to the client with the given ID.
+   *   datetime updated_since: Only return projects that have been updated since the given date and time.
+   *   integer page: The page number to use in pagination. For instance, if you make a list request and receive 100 records, your subsequent call can include page=2 to retrieve the next page of the list. (Default: 1)
+   *   integer per_page: The number of records to return per page. Can range between 1 and 100. (Default: 10)
+   *
+   * @return \FH\HarvestApiClient\Model\Project\Project[]
+   */
+  public function getProjects($params = []) {
+    $params = array_merge(['is_active' => true], $params);
+    //$key = md5(serialize($params));
+    if (empty($this->projects)) {
+      $this->projects = $this->projectEndpoint->list($params)->getProjects();
+    }
+    return $this->projects;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getHarvestProjectByCode($project_code) {
-    foreach ($this->project->list()->getProjects() as $project) {
+  public function getProjectByCode($project_code) {
+    foreach ($this->getProjects() as $project) {
       if ($project_code == $project->getCode()) {
         return $project;
       }
@@ -86,14 +111,10 @@ class HarvestService implements HarvestServiceInterface {
   }
 
   /**
-   * Returns the date string from 30 days ago.
-   *
-   * @return false|string
-   *   The Date YYYY-MM-DD.
+   * {@inheritdoc}
    */
-  private function getDate() {
-    $timestamp = strtotime('-360 days');
-    return date("c", $timestamp);
+  public function getProjectById($project_id) {
+    return $this->projectEndpoint->retrieve($project_id);
   }
 
   /**
@@ -110,8 +131,9 @@ class HarvestService implements HarvestServiceInterface {
   private function fetchTimeEntriesRecursive(Project $harvestProject, $page = 1) {
     /* @var TimeEntryCollection $timeEntryCollection */
     $timeEntryCollection = $this->timeEntry->list([
-      'updated_since' => $this->getDate(),
+      //'updated_since' => $this->getDate(),
       'project_id' => $harvestProject->getId(),
+      'is_running' => false,
       'page' => $page,
     ]);
 
@@ -121,6 +143,17 @@ class HarvestService implements HarvestServiceInterface {
       $timeEntries = array_merge($timeEntries, $this->fetchTimeEntriesRecursive($harvestProject, $page += 1));
     }
     return $timeEntries;
+  }
+
+  /**
+   * Returns the date string from 30 days ago.
+   *
+   * @return false|string
+   *   The Date YYYY-MM-DD.
+   */
+  private function getDate() {
+    $timestamp = strtotime('-360 days');
+    return date("c", $timestamp);
   }
 
 }

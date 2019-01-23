@@ -12,15 +12,34 @@ use FH\HarvestApiClient\Model\Project\Project;
 interface HarvestServiceInterface {
 
   /**
-   * Returns all valid time entries of a project.
+   * Returns projects from harvest.
+   *
+   * @return array
+   *   Harvest projects.
+   */
+  public function getProjects();
+
+  /**
+   * Returns time entries, filtered and grouped by external references.
    *
    * @param \FH\HarvestApiClient\Model\Project\Project $harvestProject
    *   The Harvest project.
    *
-   * @return mixed
-   *   All the valid time entries.
+   * @return []
+   *   All valid time entries.
    */
-  public function getValidTimeEntries(Project $harvestProject);
+  public function getTimeEntriesWithReferences(Project $harvestProject);
+
+  /**
+   * Returns the Harvest project by its project code.
+   *
+   * @param string $project_id
+   *   The project id.
+   *
+   * @return Project
+   *   The project.
+   */
+  public function getProjectById($project_id);
 
   /**
    * Returns the Harvest project by its project code.
@@ -28,9 +47,9 @@ interface HarvestServiceInterface {
    * @param string $project_code
    *   The project code.
    *
-   * @return mixed
+   * @return Project
    *   The project.
    */
-  public function getHarvestProjectByCode($project_code);
+  public function getProjectByCode($project_code);
 
 }
