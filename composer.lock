@@ -6852,12 +6852,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "21b339c9f81db98b87ed31afd887d916e2825b8c"
+                "reference": "a00e342346a34c87bd11c3d4f2f93cee1585fb2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/21b339c9f81db98b87ed31afd887d916e2825b8c",
-                "reference": "21b339c9f81db98b87ed31afd887d916e2825b8c",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/a00e342346a34c87bd11c3d4f2f93cee1585fb2c",
+                "reference": "a00e342346a34c87bd11c3d4f2f93cee1585fb2c",
                 "shasum": ""
             },
             "require": {
@@ -6910,7 +6910,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2019-01-16T21:53:45+00:00"
+            "time": "2019-01-27T18:04:53+00:00"
         },
         {
             "name": "symfony/polyfill-php72",

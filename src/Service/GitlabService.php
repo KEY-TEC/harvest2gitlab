@@ -123,20 +123,6 @@ class GitlabService implements GitlabServiceInterface {
   }
 
   /**
-   * Returns all project issues.
-   *
-   * @param int $project_id
-   *   The project id.
-   *
-   * @return array
-   *   The project issues.
-   */
-  private function getProjectIssues($project_id) {
-    $issues = $this->getClient()->issues()->all($project_id);
-    return $issues;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function getProjectByHarvest($projectPathWithNamespace) {

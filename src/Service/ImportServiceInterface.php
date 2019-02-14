@@ -12,12 +12,12 @@ interface ImportServiceInterface {
   /**
    * Import time entries of a given project.
    *
-   * @param string $project_path_with_namespace
-   *   The project code.
+   * @param string $projectId
+   *   The harvest project id.
    *
-   * @return mixed
-   *   Number of updated Time Entries.
+   * @return array
+   *   Info array: Number of updated Time Entries.
    */
-  public function importTimeEntries($project_path_with_namespace);
+  public function importTimeEntries($projectId);
 
 }

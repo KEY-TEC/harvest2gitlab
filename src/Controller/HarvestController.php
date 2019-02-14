@@ -7,9 +7,6 @@ use App\Service\ImportServiceInterface;
 use Http\Client\Common\Exception\ClientErrorException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Updates\SiteUpdateManager;
 
 /**
  * Class GitlabController.
@@ -45,8 +42,8 @@ class HarvestController extends AbstractController {
       $info = $harvest2GitlabImporterService->importTimeEntries($projectId);
       return $this->render('/project-export.html.twig', [
         'project' => $harvestService->getProjectById($projectId),
-        'updated' => $info[0],
-        'all' => $info[1],
+        'all' => $info[0],
+        'updated' => $info[1],
         'failed' => $info[2],
       ]);
     }

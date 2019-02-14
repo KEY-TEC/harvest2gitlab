@@ -41,13 +41,13 @@ class ImportService implements ImportServiceInterface {
   /**
    * Matches Harvest time entry with Gitlab issue.
    *
-   * @param string $projectPathWithNamespace
-   *   The path with namespace form Harvest.
+   * @param string $projectId
+   *   The harvest project id.
    *
    * @return array
    *   Info:
-   *    0 = updated issues
-   *    1 = all issues
+   *    0 = all issues
+   *    1 = updated issues
    *    2 = failed
    */
   public function importTimeEntries($projectId) {
@@ -77,7 +77,7 @@ class ImportService implements ImportServiceInterface {
       }
     }
 
-    return [$updated, count($time_entries), $fails];
+    return [count($time_entries), $updated, $fails];
   }
 
 }
