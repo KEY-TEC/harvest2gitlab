@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+## Install and configure harvest2gitlab.
+
+harvest_id=$(fin config get --env=local HARVEST_ACCOUNT_ID)
+harvest_token=$(fin config get --env=local HARVEST_ACCESS_TOKEN)
+git_url=$(fin config get --env=local GIT_URL)
+git_token=$(fin config get --env=local  GIT_TOKEN)
+
+harvest_project_id=$1
+
+if [[ $harvest_id == "" ]]; then
+    read -p 'Please enter Harvest account id: ' entered_harvest_id
+    fin config set --env=local HARVEST_ACCOUNT_ID=$entered_harvest_id
+fi
+
+if [[ $harvest_token == "" ]]; then
+    read -p 'Please enter Harvest access token: ' entered_harvest_token
+    fin config set --env=local HARVEST_ACCESS_TOKEN=$entered_harvest_token
+fi
+
+if [[ $git_url == "" ]]; then
+    read -p 'Please enter Git url: ' entered_git_url
+    fin config set --env=local GIT_URL=$entered_git_url
+fi
+
+if [[ $git_token == "" ]]; then
+    read -p 'Please enter Git token: ' entered_git_token
+    fin config set --env=local GIT_TOKEN=$entered_git_token
+fi
+
+fin up
+fin exec composer install
+
+echo "Run fin sync HARVEST_PROJECT_ID now."

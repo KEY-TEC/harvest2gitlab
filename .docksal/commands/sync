@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+## Sync Harvest Time entries to gitlab.
+
+harvest_id=$(fin config get --env=local HARVEST_ACCOUNT_ID)
+harvest_token=$(fin config get --env=local HARVEST_ACCESS_TOKEN)
+git_url=$(fin config get --env=local GIT_URL)
+git_token=$(fin config get --env=local  GIT_TOKEN)
+
+harvest_project_id=$1
+
+if [[ $harvest_id == "" ]]; then
+    echo "Please run fin init to configure..."
+    exit 1;
+fi
+
+if [[ $harvest_project_id == "" ]]; then
+    read -p 'Please enter harvest project id: ' harvest_project_id
+fi
+
+fin exec php bin/console app:harvest:time-export $harvest_project_id

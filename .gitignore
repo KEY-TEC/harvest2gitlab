@@ -1,3 +1,5 @@
+.docksal/docksal-local.env
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.*.local
