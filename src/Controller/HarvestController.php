@@ -7,6 +7,7 @@ use App\Service\ImportServiceInterface;
 use Http\Client\Common\Exception\ClientErrorException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class GitlabController.

@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+fin up
+fin exec composer install
+
+harvest_id=$(fin config get HARVEST_ACCOUNT_ID)
+harvest_token=$(fin config get HARVEST_ACCESS_TOKEN)
+git_url=$(fin config get GIT_URL)
+git_token=$(fin config get GIT_TOKEN)
+
+if [[ $harvest_id == "" ]]; then
+    echo 'No Harvest account id found'
+    read -p 'Please enter Harvest account id: ' entered_harvest_id
+    fin config set HARVEST_ACCOUNT_ID=$entered_harvest_id
+fi
+
+if [[ $harvest_token == "" ]]; then
+    echo 'No Harvest access token found'
+    read -p 'Please enter Harvest access token: ' entered_harvest_token
+    fin config set HARVEST_ACCESS_TOKEN=$entered_harvest_token
+fi
+
+if [[ $git_url == "" ]]; then
+    echo 'No Git url found'
+    read -p 'Please enter Git url: ' entered_git_url
+    fin config set GIT_URL=$entered_git_url
+fi
+
+if [[ $git_token == "" ]]; then
+    echo 'No Git token found'
+    read -p 'Please enter Git token: ' entered_git_token
+    fin config set GIT_TOKEN=entered_git_token
+fi
+
+read -p 'Please enter harvest project id: ' harvest_project_id
+
+php bin/console app:harvest:time-export 19115010
