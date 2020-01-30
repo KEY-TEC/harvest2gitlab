@@ -1,8 +1,0 @@
-version: "2.1"
-services:
- cli:
-  environment:
-    HARVEST_ACCOUNT_ID: 272007
-    HARVEST_ACCESS_TOKEN: 30473.pt.6TCCV0gLlgC-cX_3ZN8MOOVZ8-My_zefHS6gR39sKYFjfXu2u5nScDWHQg5puUE9GMdEfp2u6REZ7FyvR7aHuA
-    GIT_URL: https://git.key-tec.de/
-    GIT_TOKEN: 5zPP6SXxvpY_MVYjo7M1

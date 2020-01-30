@@ -1,5 +1,10 @@
 version: "2.1"
 services:
  cli:
+   environment:
+     HARVEST_ACCOUNT_ID: ${HARVEST_ACCOUNT_ID}
+     HARVEST_ACCESS_TOKEN: ${HARVEST_ACCESS_TOKEN}
+     GIT_URL: ${GIT_URL}
+     GIT_TOKEN: ${GIT_TOKEN}
    ports:
      - "2222:22"
