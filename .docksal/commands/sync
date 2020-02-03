@@ -18,4 +18,8 @@ if [[ $harvest_project_id == "" ]]; then
     read -p 'Please enter harvest project id: ' harvest_project_id
 fi
 
-fin exec php bin/console app:harvest:time-export $harvest_project_id
+if [[ $harvest_project_code == "" ]]; then
+    read -p 'Please enter harvest project code: ' harvest_project_code
+fi
+
+fin exec php bin/console app:harvest:time-export $harvest_project_id $harvest_project_code

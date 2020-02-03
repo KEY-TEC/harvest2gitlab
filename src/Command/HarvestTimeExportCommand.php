@@ -45,24 +45,53 @@ class HarvestTimeExportCommand extends Command {
       // the full command description shown when running the command with
       // the "--help" option
       ->setHelp('This will export time entries from Harvest with references to Gitlab issues and update the time spend of each issue.')
-      ->addArgument('harvest project id', InputArgument::REQUIRED, 'the harvest project id')
+      ->addArgument('harvest project id', InputArgument::OPTIONAL, 'the harvest project id')
+      ->addArgument('harvest project code', InputArgument::OPTIONAL, 'the harvest project code')
     ;
   }
 
   protected function execute(InputInterface $input, OutputInterface $output) {
     $project_id = $input->getArgument('harvest project id');
+    $project_code = $input->getArgument('harvest project code');
+
+
+//    $this->harvest_service->getProjectByCode("keytec/harvest2gitlab");
 
     $io = new SymfonyStyle($input, $output);
     $io->title('Export time entries from harvest');
 
-    try {
-      $project = $this->harvest_service->getProjectById($project_id);
-    }
-    catch (ClientErrorException $e) {
-      $io->error('No harvest project found for id ' . $project_id);
-      $io->text('Aborting.');
+    if ($project_id == NULL && $project_code == NULL) {
+      $io->error('No project id or code found');
+      $io->text('Please add your Hubspot project id or code in order to start the sync');
       exit;
     }
+
+    $project = NULL;
+
+    if ($project_id != NULL) {
+      try {
+        $project = $this->harvest_service->getProjectById($project_id);
+      }
+      catch (ClientErrorException $e) {
+        $io->warning('No harvest project found for id ' . $project_id);
+      }
+    }
+
+
+    if ($project == NULL && $project_code != NULL) {
+      try {
+        $io->text('Trying to find project code, this may take a while...');
+
+        $project = $this->harvest_service->getProjectByCode($project_code);
+        $project_id = $project->getId();
+      }
+      catch (ClientErrorException $e) {
+        $io->error('No harvest project found for code ' . $project_code);
+        $io->text('Aborting.');
+        exit;
+      }
+    }
+
 
     $project_name = $project->getCode() ? '[' . $project->getCode() . '] ' : '';
     $project_name .= $project->getName();

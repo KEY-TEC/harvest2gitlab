@@ -111,9 +111,16 @@ class GitlabService implements GitlabServiceInterface {
    */
   public function saveTimeSpend($project_id, $issue_id, $hours) {
     $issues = $this->getClient()->issues();
+    $exploded_project_id = explode("/", $project_id);
+    if ($exploded_project_id[0] == "") {
+      $project_id_untrimmed = $project_id;
+      $project_id = ltrim($project_id_untrimmed, "/");
+    }
     $old_time = $issues->getTimeStats($project_id, $issue_id)['total_time_spent'];
+    $new_time = abs($hours * 3600);
     // only need update on more than 5 minutes difference
-    if (abs($hours * 3600 - $old_time) >= 300) {
+    $x = abs($new_time - $old_time);
+    if (abs($new_time - $old_time) >= 300) {
       $time_spend = floor($hours) . 'h' . floor(($hours - floor($hours)) * 60) . 'm';
       $issues->resetSpentTime($project_id, $issue_id);
       $issues->addSpentTime($project_id, $issue_id, $time_spend);

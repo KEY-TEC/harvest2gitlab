@@ -90,11 +90,20 @@ class HarvestService implements HarvestServiceInterface {
    *
    * @return \FH\HarvestApiClient\Model\Project\Project[]
    */
-  public function getProjects($params = []) {
-    $params = array_merge(['is_active' => true], $params);
-    //$key = md5(serialize($params));
-    if (empty($this->projects)) {
+  public function getProjects($page = 1) {
+    $params = array_merge(['is_active' => true], ['page' => $page]);
+
+    $page_next = $this->projectEndpoint->list($params)->getNextPage();
+    if ($page_next >= $page) {
+      $old_projects = $this->projects;
       $this->projects = $this->projectEndpoint->list($params)->getProjects();
+      if ($old_projects != NULL) {
+        $new_projects = array_merge($old_projects, $this->projects);
+      } else {
+        $new_projects = $this->projects;
+      }
+      $this->projects = $new_projects;
+      $this->getProjects($page += 1);
     }
     return $this->projects;
   }
